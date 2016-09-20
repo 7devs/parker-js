@@ -39,7 +39,7 @@ router.route('/count/:sex')  //获取指定性别的人数统计
     .get(function(req, res, next) {
 var sex = req.params.sex;
 var sexTotal = 0;
-    for(var i = 0; i < userModel.length; i++) {
+    for(var i = 0; i < usersModel.length; i++) {
     if(usersModel[i].sex === sex) {
         sexTotal++;}
         };
