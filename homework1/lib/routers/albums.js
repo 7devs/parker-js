@@ -8,31 +8,7 @@ router.route('/')
     });                                                     //返回全部唱片
 
 
-router.route('/:id')
-    .get(function(req, res, next) {
-var id = req.params.id;
-var index = id - 1;
-    if(albumsModel[index]) {
-        res.status(200).send(albumsModel[index]);           //返回指定索引的唱片数据
-    } else {
-        res.status(404).send('Not Found');     //若唱片不存在，返回状态码为 404 的 Not Found 信息
-        };
-    });
 
-router.route('/:id')
-    .put(function(req, res, next) {
-var id = req.params.id;
-var index = id - 1;
-    if(albumsModel[index]) {
-        newLength = parseInt(req.body.length);
-        newTitle = req.body.title
-        albumsModel[index].length = newLength;
-        albumsModel[index].title = newTitle;
-        res.status(200).send(albumsModel[index]);  //修改指定索引唱片的时长和标题并返回结果
-    } else {
-        res.status(404).send('Not Found');       //若唱片不存在，返回状态码为 404 的 Not Found 信息
-        };
-    });
 
 router.route('/longerSong')
     .get(function(req, res, next) {
@@ -61,7 +37,7 @@ var titleList = new Array();
         };
     });
 
-router.route('/search?type=xxx')
+router.route('/search')
     .get(function(req, res, next) {
 var typeSearch = req.query.type;
 var ts = new RegExp(typeSearch);
@@ -77,4 +53,30 @@ var songList = new Array();
             res.status(404).send('Not Found'); //若分类不存在，返回状态码为 404 的 Not Found 信息
             };
         });
+
+        router.route('/:id')
+            .get(function(req, res, next) {
+        var id = req.params.id;
+        var index = id - 1;
+            if(albumsModel[index]) {
+                res.status(200).send(albumsModel[index]);           //返回指定索引的唱片数据
+            } else {
+                res.status(404).send('Not Found');     //若唱片不存在，返回状态码为 404 的 Not Found 信息
+                };
+            });
+
+        router.route('/:id')
+            .put(function(req, res, next) {
+        var id = req.params.id;
+        var index = id - 1;
+            if(albumsModel[index]) {
+                newLength = parseInt(req.body.length);
+                newTitle = req.body.title
+                albumsModel[index].length = newLength;
+                albumsModel[index].title = newTitle;
+                res.status(200).send(albumsModel[index]);  //修改指定索引唱片的时长和标题并返回结果
+            } else {
+                res.status(404).send('Not Found');       //若唱片不存在，返回状态码为 404 的 Not Found 信息
+                };
+            });        
 module.exports=router;
