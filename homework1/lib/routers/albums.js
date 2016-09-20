@@ -1,5 +1,5 @@
-var router = require('express').Router() // 引入 Express 的路由处理
-var albumsModel = require('../models/albums.js'); // 引入数据模型
+var router = require('express').Router() ;// 引入 Express 的路由处理
+var albumsModel = require('../models/albums.js') ;// 引入数据模型
 
 
 router.route('/')
@@ -10,7 +10,7 @@ router.route('/')
 
 router.route('/:id')
     .get(function(req, res, next) {
-var id = req.params.id,
+var id = req.params.id;
 var index = id - 1;
     if(albumsModel[index]) {
         res.status(200).send(albumsModel[index]);           //返回指定索引的唱片数据
@@ -19,9 +19,9 @@ var index = id - 1;
         };
     });
 
-
+router.route('/:id')
     .put(function(req, res, next) {
-var id = req.params.id,
+var id = req.params.id;
 var index = id - 1;
     if(albumsModel[index]) {
         newLength = parseInt(req.body.length);
@@ -46,8 +46,8 @@ var song3List = new Array();;
 
 router.route('/singer/:name')
     .get(function(req, res, next) {
-var singerSearch = req.params.name,
-var ss = new RegExp(singerSearch, "g"), // attributes g 全局匹配
+var singerSearch = req.params.name;
+var ss = new RegExp(singerSearch, "g"); // attributes g 全局匹配
 var titleList = new Array();
     for(i = 0; i < albumsModel.length; i++) {
         if(ss.test(albumsModel[i].singer) === true ) {
@@ -63,8 +63,8 @@ var titleList = new Array();
 
 router.route('/search?type=xxx')
     .get(function(req, res, next) {
-var typeSearch = req.query.type,
-var ts = new RegExp(typeSearch),
+var typeSearch = req.query.type;
+var ts = new RegExp(typeSearch);
 var songList = new Array();
     for(i = 0; i < albumsModel.length; i++) {
         if(ts.test(albumsModel[i].type) === true ) {
@@ -77,3 +77,4 @@ var songList = new Array();
             res.status(404).send('Not Found'); //若分类不存在，返回状态码为 404 的 Not Found 信息
             };
         });
+module.exports=router;
