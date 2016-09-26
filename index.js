@@ -13,6 +13,6 @@ wechat.createMenu(require('./lib/menu.json'));
 
 app.use('/wxapi', require('./lib/routers/wxapi.js'));
 
-app.listen(8017, function(err) {
-    console.log('listenning at 8017...');
+app.listen(8012, function(err) {
+    console.log('listenning at 8012...');
 })
